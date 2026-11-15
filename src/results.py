@@ -1,16 +1,22 @@
+from src.settings import RESULTS_FOLDER
+
+
+# this function writes into a file.
+# use read and write mode to read if current score is higher than the max(stored) score and write it into the file.
 def save_player_results(player: dict, folder: str) -> bool:
     """Save a player’s personal best in the results folder."""
     # TODO: Check CSVs in the folder for the same player name and highest saved total.
     # Overwrite that player’s best file only if the new total is greater; keep ties.
-    # For a new name, write a separate CSV in this folder; create the folder if needed.
+    # Use the player name for the CSV filename, matching load_player_results; create the folder if needed.
     # Save the scorecard and total; return True if saved, False if unchanged or saving fails.
     pass
 
 
-def load_player_results(filename: str) -> dict:
-    """Read one player’s scores from their CSV file."""
-    # TODO: Read the player’s name, category scores, bonuses, and total from their CSV.
-    # Convert empty categories to None and used scores to integers, including zero.
+def load_player_results(player_name: str) -> dict:
+    """Find and read a player’s CSV using their name."""
+    # TODO: Build the CSV path from RESULTS_FOLDER and the player name, e.g. Alex.csv.
+    # Use the same filename rule as saving; handle names with invalid filename characters consistently.
+    # Read the scorecard; convert empty categories to None and numeric scores to integers.
     # Return the player’s data, or an empty dictionary if the file cannot be read.
     pass
 

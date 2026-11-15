@@ -1,5 +1,7 @@
+from tkinter import Tk, messagebox, ttk
 
-from tkinter import Tk
+from src.scoring import calculate_all_category_scores, calculate_player_total
+from src.settings import ALL_CATEGORIES, WINDOW_SIZE, WINDOW_TITLE
 
 
 def create_game_window() -> Tk:
@@ -19,7 +21,9 @@ def update_game_display(
 ) -> None:
     """Refresh the window to match the current game state."""
     # TODO: Show current dice, held positions, scorecards, player turn, and rolls remaining.
-    # Distinguish unused scores from zero and disable actions that are unavailable.
+    # After a roll, use calculate_all_category_scores to preview unused category points.
+    # Save points only when selected; keep filled categories unchanged and unavailable.
+    # Distinguish previews, unused scores, and recorded zero scores.
     pass
 
 

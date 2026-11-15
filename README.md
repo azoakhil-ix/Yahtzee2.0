@@ -14,7 +14,7 @@ Our instructor has approved **Yahtzee** and **multiple Python files**.
 - `src/settings.py`: shared game settings, categories, and scoring constants.
 - `src/state.py`: starting values for players, dice, holds, and turns.
 - `src/dice.py`: roll dice and keep held dice.
-- `src/scoring.py`: calculate category scores and totals.
+- `src/scoring.py`: one function per scoring category, plus player totals.
 - `src/game.py`: manage players, scorecards, turns, and winners.
 - `src/ui.py`: Tkinter window, rules, scores, and quitting.
 - `src/results.py`: save and read previous game results.
@@ -56,8 +56,8 @@ TODO: Add team names and final project details.
 
 ## CSV scorecards
 
-Each player gets a separate CSV file, such as `results/player_1.csv` and
-`results/player_2.csv`. Each file contains that player’s scores and total.
+Each player gets a name-based CSV file, such as `results/Alex.csv` and
+`results/Sam.csv`. Each file contains that player’s scores and total.
 An empty category cell means it is still available; `0` means it was used for zero
 points. Python uses `None` for empty categories. Saving/loading is still a TODO.
 
@@ -69,4 +69,15 @@ All CSVs are stored in the `results` folder, configured by `RESULTS_FOLDER` in
 `src/settings.py`. No filename list is stored. `retrieve_all_player_results(folder)`
 reads the folder directly and returns one best result per name, highest score first:
 `[{"name": "Alex", "total": 180}]`. The UI displays those two fields.
-These functions remain unimplemented TODOs.
+`load_player_results(player_name)` finds a player’s file by name using the configured
+results folder. Saving and loading must use the same filename rule, including
+handling characters that cannot appear in filenames. These functions remain TODOs.
+
+## Score previews
+
+After a roll, the UI will show the points available in each unused category.
+Each category has its own scoring function in `src/scoring.py`. The master function
+`calculate_all_category_scores(dice)` calls them all and returns a dictionary
+of category names and points for the UI. These functions
+only calculate points; selecting a category records them. Filled categories keep
+their saved scores. Score previews and their functions are still TODOs.

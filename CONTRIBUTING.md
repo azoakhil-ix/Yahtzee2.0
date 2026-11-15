@@ -88,6 +88,8 @@ ask a teammate for help.
 
 ## Shared variables
 
+**Do not edit `src/settings.py`.** If a setting needs to change, discuss it with the team first.
+
 `src/settings.py` contains values that stay the same, such as the number of dice
 and category names. `src/state.py` contains the changing game values.
 
@@ -105,4 +107,23 @@ Keep one CSV per player name; replace a saved result only for a strictly higher
 score. New names get separate files in the same folder. Match names exactly.
 Retrieval reads all CSVs in the folder and returns dictionaries containing `name`
 and `total`, highest first, ready for `display_previous_results`.
+`load_player_results(player_name)` takes a name, not a filename, and uses
+`settings.RESULTS_FOLDER`. Name files consistently when saving and loading
+(e.g. Alex → `results/Alex.csv`), including handling invalid filename characters.
 Saving and retrieval are still TODOs for the team to implement.
+
+## Scoring functions
+
+Implement each of the thirteen `score_...` functions in `src/scoring.py` separately.
+Each receives five dice and returns points without changing the scorecard.
+Implement `calculate_all_category_scores(dice)` to call all thirteen and return
+a dictionary of category names and points. The UI uses that dictionary to preview
+unused categories after a roll; only the selected
+category gets recorded. Keep previews visually separate from saved scores.
+
+## Imports
+
+Functions and fixed settings are imported directly where needed. Call them without
+a file prefix, for example `roll_five_dice()` or `NUMBER_OF_DICE`.
+Changing game values still travel through function parameters. Importing an
+individual state variable and assigning it a new value does not update `state.py`.
