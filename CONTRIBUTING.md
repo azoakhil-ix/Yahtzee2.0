@@ -72,7 +72,7 @@ Before editing, open the project folder and get the latest version:
 
 ```sh
 git switch main
-git pull --ff-only origin main
+git pull
 ```
 
 After editing, check and save your work. Example for dice (replace the file name
@@ -82,15 +82,13 @@ and commit message with your own):
 git diff
 git add src/dice.py
 git commit -m "Add dice functions"
-git pull --rebase origin main
-git push origin main
+git push
 ```
 
-Commit all your intended changes before the second pull. If someone pushed while
-you were working, that pull brings their changes in before yours are uploaded.
-If Git reports a conflict, ask a teammate to help resolve it before pushing.
-If a push is rejected because main changed again, repeat the pull and push.
-Do not use force push.
+`git pull` gets your teammates’ latest changes. `git push` uploads your commits.
+If a push is rejected because someone updated main, run `git pull`, then `git push`
+again. If Git asks how to combine changes or reports a conflict, ask a teammate
+for help before continuing.
 
 Tell teammates which file you are editing. Do not upload `.venv` or passwords.
 
