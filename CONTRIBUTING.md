@@ -65,32 +65,26 @@ Read the submission checklist in README.md. Submit `fun_game.py` and the whole
 
 ## Share your changes
 
-Everyone works directly on `main`. No extra branches or pull requests are needed.
-The owner must invite the other three people as GitHub collaborators.
+Everyone works on `main`. The owner must invite the other three people as
+GitHub collaborators.
 
-Before editing, open the project folder and get the latest version:
+Before working:
 
 ```sh
-git switch main
 git pull
 ```
 
-After editing, check and save your work. Example for dice (replace the file name
-and commit message with your own):
+After working:
 
 ```sh
-git diff
-git add src/dice.py
-git commit -m "Add dice functions"
+git add .
+git commit -m "message"
 git push
 ```
 
-`git pull` gets your teammates’ latest changes. `git push` uploads your commits.
-If a push is rejected because someone updated main, run `git pull`, then `git push`
-again. If Git asks how to combine changes or reports a conflict, ask a teammate
-for help before continuing.
-
-Tell teammates which file you are editing. Do not upload `.venv` or passwords.
+Replace `message` with a short description of what you changed.
+Tell teammates which file you are editing. If Git reports an error or conflict,
+ask a teammate for help.
 
 ## Shared variables
 
