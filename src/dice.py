@@ -3,16 +3,26 @@ from random import randint
 from src.settings import MAX_DIE_VALUE, MIN_DIE_VALUE, NUMBER_OF_DICE
 
 
-#this function is only called once per games per user.
+# Called once at the start of a turn to throw all five dice fresh.
 def roll_five_dice() -> list[int]:
     """Return the values of five newly rolled dice."""
-    # TODO: Generate five random integers from 1 through 6.
-    # Return them as a list in the same order they will appear on screen.
-    pass
+    # Build a list of five random faces, each from 1 through 6.
+    new_dice = []
+    for _ in range(NUMBER_OF_DICE):
+        new_dice.append(randint(MIN_DIE_VALUE, MAX_DIE_VALUE))
+    return new_dice
 
-#after above function is called for the firstime only this one will be called.
+
+# Called on the second and third rolls of a turn to reroll only the loose dice.
 def reroll_unheld_dice(dice: list[int], held: list[bool]) -> list[int]:
     """Return new dice values while preserving held positions."""
-    # TODO: Accept five dice and five True/False values marking which dice are held.
-    # Reroll only positions marked False and return a new list of five values.
-    pass
+    # Walk through each of the five positions in order.
+    new_dice = []
+    for position in range(NUMBER_OF_DICE):
+        if held[position]:
+            # The player is keeping this die, so copy its current value.
+            new_dice.append(dice[position])
+        else:
+            # This die is loose, so roll a new random face for it.
+            new_dice.append(randint(MIN_DIE_VALUE, MAX_DIE_VALUE))
+    return new_dice
