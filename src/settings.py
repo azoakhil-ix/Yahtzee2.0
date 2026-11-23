@@ -32,7 +32,7 @@ EXTRA_YAHTZEE_BONUS_POINTS: int = 100
 # TODO: Agree on repeat-Yahtzee eligibility and Joker rules before using this bonus.
 
 # Interface and file settings.
-WINDOW_TITLE: str = "Yahtzee"
+WINDOW_TITLE: str = "Yahtzee2.0"
 WINDOW_SIZE: str = "1000x700"
 # Store a separate CSV for each player, such as player_1.csv and player_2.csv.
 RESULTS_FOLDER: str = "results"
