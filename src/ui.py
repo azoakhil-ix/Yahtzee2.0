@@ -10,7 +10,7 @@
 # Assignment: Lab 13 Team
 # Date: November 23, 2026
 
-from tkinter import PhotoImage, Tk, messagebox, ttk
+from tkinter import Frame, Label, PhotoImage, Tk, messagebox, ttk
 
 from src.scoring import calculate_all_category_scores, calculate_player_total
 from src.settings import (
@@ -46,6 +46,26 @@ def create_game_window() -> Tk:
     style.configure("Score.Treeview.Heading", padding=5, background="#e4dccb", foreground=INK)
     style.map("Score.Treeview", background=[("selected", "#b9dfc9")],
               foreground=[("selected", INK)])
+
+    window.tabs = ttk.Notebook(window)
+    window.game_tab = Frame(window.tabs, background=PAPER)
+    window.rules_tab = Frame(window.tabs, background=PAPER, padx=30, pady=25)
+    window.tabs.add(window.game_tab, text="Game")
+    window.tabs.add(window.rules_tab, text="How to Play")
+    window.tabs.enable_traversal()
+
+    Label(window.rules_tab, text="How to Play", background=PAPER, foreground=INK,
+          font=("Georgia", 26, "bold")).pack(anchor="w", pady=(0, 14))
+    steps = (
+        "Click Roll Dice. You get up to three rolls per turn.",
+        "Click a die to keep it. Click it again to release it. Only loose dice reroll.",
+        "Choose an unused category and click Record score. A zero still fills the category.",
+        "When everyone fills their scorecard, the highest total wins.",
+    )
+    for index, step in enumerate(steps, start=1):
+        Label(window.rules_tab, text=f"{index}. {step}", background=PAPER,
+              foreground=INK, font=("TkDefaultFont", 13), justify="left",
+              wraplength=660).pack(anchor="w", pady=6)
 
     # Paint each die face once and keep the images alive on the window.
     pips = ((), (4,), (0, 8), (0, 4, 8), (0, 2, 6, 8),
@@ -128,16 +148,8 @@ def update_game_display(
 
 
 def display_game_rules(window: Tk) -> None:
-    """Explain how to take a turn and win."""
-    messagebox.showinfo(
-        "Rules",
-        "Roll up to three times per turn. Click dice to hold or release them.\n\n"
-        "Select an unused category after any roll and click Record score. "
-        "A zero still uses up the category. A dash marks an unused score.\n\n"
-        "Score at least 63 points in Ones through Sixes for a 35-point bonus. "
-        "The highest total after everyone fills the scorecard wins.",
-        parent=window,
-    )
+    """Open the rules tab in the game window."""
+    window.tabs.select(window.rules_tab)
 
 
 def display_player_scores(window: Tk, players: list[dict]) -> None:

@@ -79,12 +79,14 @@ def start_game() -> None:
           font=("Georgia", 22, "bold")).pack(side="left")
     ttk.Button(toolbar, text="Quit", style="Game.TButton",
                command=partial(action.set, "quit")).pack(side="right")
-    for text, choice in (("Previous results", "previous"), ("Rules", "rules")):
-        ttk.Button(toolbar, text=text, style="Game.TButton",
-                   command=partial(action.set, choice)).pack(side="right", padx=4)
+    ttk.Button(toolbar, text="Previous results", style="Game.TButton",
+               command=partial(action.set, "previous")).pack(side="right", padx=4)
+    ttk.Button(toolbar, text="Rules", style="Game.TButton",
+               command=partial(display_game_rules, window)).pack(side="right", padx=4)
+    window.tabs.pack(fill="both", expand=True, padx=20, pady=(0, 20))
 
-    setup = Frame(window, background=FELT, padx=32, pady=32)
-    setup.pack(fill="both", expand=True, padx=20, pady=(0, 20))
+    setup = Frame(window.game_tab, background=FELT, padx=32, pady=32)
+    setup.pack(fill="both", expand=True)
     Label(setup, text="Set up your game", background=FELT, foreground=PAPER,
           font=("Georgia", 28, "bold")).pack(anchor="w")
     Label(setup, text="Enter names for two to four players.", background=FELT,
@@ -113,8 +115,6 @@ def start_game() -> None:
                 players = create_player_scorecards(names)
             except ValueError as error:
                 messagebox.showerror("Player names", str(error), parent=window)
-        elif choice == "rules":
-            display_game_rules(window)
         elif choice == "previous":
             display_previous_results(window, retrieve_all_player_results(RESULTS_FOLDER))
         elif choice == "quit":
@@ -124,8 +124,8 @@ def start_game() -> None:
     setup.destroy()
     ttk.Button(toolbar, text="Scores", style="Game.TButton",
                command=partial(action.set, "scores")).pack(side="right", padx=4)
-    board = Frame(window, background=FELT, padx=16, pady=10)
-    board.pack(fill="both", expand=True, padx=20, pady=(0, 20))
+    board = Frame(window.game_tab, background=FELT, padx=16, pady=10)
+    board.pack(fill="both", expand=True)
     score_panel = Frame(board, background=PAPER, padx=10, pady=10)
     score_panel.pack(side="right", fill="y")
     Label(score_panel, text="Scorecard", background=PAPER, foreground=INK,
@@ -228,8 +228,6 @@ def start_game() -> None:
         if choice == "quit":
             if confirm_and_quit_game(window):
                 return
-        elif choice == "rules":
-            display_game_rules(window)
         elif choice == "scores":
             display_player_scores(window, players)
         elif choice == "previous":
