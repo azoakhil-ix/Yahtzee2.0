@@ -1,83 +1,66 @@
-<!-- Contributors: TODO: Add all contributing team members. Section: TODO. -->
-# Yahtzee
+# Yahtzee2.0
 
-A planned Python/Tkinter game for 2–4 players sharing one computer.
-**Scaffold only:** functions contain docstrings, short TODOs, and `pass`.
-Nothing is playable yet.
+Yahtzee2.0 is a Python and Tkinter game for 2–4 players sharing one computer.
 
-## Assignment
+**ENGR 102, Section 577 · Lab 13 Team**
 
-Follow the [official Lab 13 instructions](https://github.com/tamu-edu-students/engr-102-lab-13-team/blob/main/README.md).
-Our instructor has approved **Yahtzee** and **multiple Python files**.
+Akhil Azemkouo, Chiemezie Akparu, William Bryla, and Lucas Baldwin
 
-- `fun_game.py`: connect the functions and launch the game.
-- `src/settings.py`: shared game settings, categories, and scoring constants.
-- `src/state.py`: starting values for players, dice, holds, and turns.
-- `src/dice.py`: roll dice and keep held dice.
-- `src/scoring.py`: one function per scoring category, plus player totals.
-- `src/game.py`: manage players, scorecards, turns, and winners.
-- `src/ui.py`: Tkinter window, rules, scores, and quitting.
-- `src/results.py`: save and read previous game results.
-- `CONTRIBUTING.md`: Mac/Windows setup and collaboration commands.
+## Run the game
 
-## Run
+Install Python 3.11 or newer with Tcl/Tk support. The official Python downloads include Tcl/Tk, and the game requires no pip packages. [Download Python](https://www.python.org/downloads/)
 
-With Python and Tkinter installed:
+If you received the project as a ZIP file, extract it first. Open Terminal on Mac or PowerShell on Windows, then use `cd` to enter the folder containing `fun_game.py`.
+
+### Mac (Terminal)
 
 ```sh
-python fun_game.py
+python3 fun_game.py
 ```
 
-This currently exits without opening a window.
+### Windows (PowerShell)
 
-## Required before submission
+```powershell
+py -3 fun_game.py
+```
 
-- Implement rules/instructions, player options, scores, quitting, and file reading/writing.
-- Use if/elif/else, loops, dictionaries, functions with docstrings, try/except, and comments.
-- Finish and independently verify a working UI/game; identify something learned beyond class.
-- Add every contributing member’s name to each submitted file’s team header.
+If PowerShell does not recognize `py`, run `python fun_game.py` after checking that `python --version` shows Python 3.11 or newer.
 
-## Documents your team must write
+### If the window does not open
 
-AI is allowed for coding, but not the planning hierarchy, descriptions, test cases,
-or reflections. This scaffold is coding assistance, not your submitted design plan.
+Run `python3 -m tkinter` on Mac or `py -3 -m tkinter` on Windows. If you used `python` to launch the game, use `python -m tkinter` here too. A small test window confirms Tkinter is available. If the check reports a missing `tkinter` or `_tkinter` module, install Python with Tcl/Tk support and reopen your terminal. [Python Tkinter documentation](https://docs.python.org/3/library/tkinter.html)
 
-- `game_plan.pdf`: game choice (~100 words), team-drawn hierarchy (leaves about
-  10 lines of code or less), flow explanation (~200 words), at least 10 team-written
-  test cases, and a user manual added after completion with launch steps and input/output examples.
-- `reflection_yourname.pdf`: each member answers all eight assignment questions,
-  50–100 words each; use first initial and last name in the filename.
+## Play
 
-Include `fun_game.py` and the entire `src` folder together.
-Every member submits the game, plan, and any required supporting files to Canvas
-part 1, and their individual reflection to part 2. See the linked assignment for details.
+Enter two to four player names and select **Start game**. On your turn, select **Roll Dice** to throw the dice into the center. Click a die to hold it by your name, or click it again to release it. Only loose dice move on a reroll.
 
-TODO: Add team names and final project details.
+The scorecard previews points for the active player's unused categories. Select a category and click **Record score** to end your turn. A recorded zero uses up the category. Use **Rules** to see the game instructions and **Previous results** to see saved personal bests.
 
-## CSV scorecards
+See the [plain-language Yahtzee rules](RULES.md) for the scoring table and official bonus rules.
 
-Each player gets a name-based CSV file, such as `results/Alex.csv` and
-`results/Sam.csv`. Each file contains that player’s scores and total.
-An empty category cell means it is still available; `0` means it was used for zero
-points. Python uses `None` for empty categories. Saving/loading is still a TODO.
+## Saved results
 
-Saved results keep each player’s personal best. For the same exact name, overwrite
-only when the new total is greater than the highest saved total. Equal or lower
-scores leave the files unchanged. New names get separate CSVs.
+The game creates `results/personal_bests.csv` after the first completed game. Keep the `results/` folder in the project so the game can save there. The CSV stores each saved scorecard and total. A new result is added when it beats the best total for that exact player name. **Previous results** displays the highest saved total per name, highest first.
 
-All CSVs are stored in the `results` folder, configured by `RESULTS_FOLDER` in
-`src/settings.py`. No filename list is stored. `retrieve_all_player_results(folder)`
-reads the folder directly and returns one best result per name, highest score first:
-`[{"name": "Alex", "total": 180}]`. The UI displays those two fields.
-`load_player_results(player_name)` finds a player’s file by name using the configured
-results folder. Saving and loading must use the same filename rule, including
-handling characters that cannot appear in filenames. These functions remain TODOs.
+## Project files
 
-## Score previews
+| File | Purpose |
+|---|---|
+| `fun_game.py` | Launches the game |
+| `src/game.py` | Handles player setup, turns, and the game loop |
+| `src/ui.py` | Draws the Tkinter table, dice, and scorecard |
+| `src/dice.py` | Rolls dice and preserves held values |
+| `src/scoring.py` | Calculates score previews and totals |
+| `src/results.py` | Reads and writes the personal-best CSV |
+| `src/settings.py` | Defines game and interface settings |
 
-After a roll, the UI will show the points available in each unused category.
-Each category has its own scoring function in `src/scoring.py`. The master function
-`calculate_all_category_scores(dice)` calls them all and returns a dictionary
-of category names and points for the UI. These functions
-only calculate points; selecting a category records them. Filled categories keep
-their saved scores. Score previews and their functions are still TODOs.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for team setup and collaboration commands.
+
+## Lab submission
+
+Our instructor approved Yahtzee and the use of multiple Python files. Keep `fun_game.py`, `src/`, and `results/` together when submitting the game. Each teammate should independently verify the final game.
+
+- **Canvas Part 1** · Each teammate submits the game files and the team-written `game_plan.pdf`, including the game-choice description, hierarchy, flow explanation, test cases, and user manual.
+- **Canvas Part 2** · Each teammate submits their own `reflection_yourname.pdf`.
+
+See the [official Lab 13 instructions](https://github.com/tamu-edu-students/engr-102-lab-13-team) for the full requirements and limits on AI assistance.
