@@ -59,7 +59,7 @@ Before making changes, run `git pull`. When ready to commit, check `git status`,
 
 ```sh
 git status
-git add README.md CONTRIBUTING.md
+git add .
 git commit -m "Update setup instructions"
 git push
 ```
