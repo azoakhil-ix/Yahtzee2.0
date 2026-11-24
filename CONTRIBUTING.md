@@ -31,6 +31,15 @@ py -3 fun_game.py
 
 Close the small Tkinter test window before running the final command. If Windows does not recognize `py`, try `python --version`. If it shows Python 3.11 or newer, replace `py -3` with `python` in the remaining commands. If the Tkinter check fails, see the troubleshooting steps in [README.md](README.md#if-the-window-does-not-open).
 
+## Run automated checks
+
+From the folder containing `fun_game.py`, run the command for your system:
+
+- **Mac (Terminal)** · `python3 -B test/check_game.py`
+- **Windows (PowerShell)** · `py -3 -B test/check_game.py`
+
+If Windows uses `python` instead of `py`, run `python -B test/check_game.py`. The runner lists each check and prints an overall **PASS** or **FAIL**. The `-B` flag prevents Python from creating new bytecode cache files.
+
 ## Working together
 
 `fun_game.py` launches the game. Implement game features in the appropriate `src/` module and keep function docstrings current. Coordinate shared dictionary keys and return values with your teammates before changing them.

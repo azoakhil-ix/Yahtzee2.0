@@ -56,6 +56,15 @@ The game creates `results/personal_bests.csv` after the first completed game. Ke
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for team setup and collaboration commands.
 
+## Run automated checks
+
+From the folder containing `fun_game.py`, run the command for your system:
+
+- **Mac (Terminal)** · `python3 -B test/check_game.py`
+- **Windows (PowerShell)** · `py -3 -B test/check_game.py`
+
+If Windows uses `python` instead of `py`, run `python -B test/check_game.py`. The runner lists each check and prints an overall **PASS** or **FAIL**. The `-B` flag prevents Python from creating new bytecode cache files.
+
 ## Lab submission
 
 Our instructor approved Yahtzee and the use of multiple Python files. Keep `fun_game.py`, `src/`, and `results/` together when submitting the game. Each teammate should independently verify the final game.
